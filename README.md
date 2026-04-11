@@ -1,8 +1,7 @@
-# Raspberry Pi Temperature and Humidity Sensor Reader (AHT20)
+# Raspberry Pi Temperature & Humidity Display System (AHT20 + OLED)
 
-This project is a simple C program on Raspberry Pi for reading temperature and humidity data from an AHT20 sensor over the I2C interface.
-
-The program communicates with the sensor through Linux's `/dev/i2c-1` device, sends measurement commands, reads raw sensor data, and converts the result into human-readable temperature and humidity values.
+This project uses a C program on Raspberry Pi to read temperature and humidity data from an AHT20 sensor via I2C, and display the results on an OLED screen.
+It involves sensor communication, data parsing, and real-time visualization through low-level device control.
 
 
 ## My notes
