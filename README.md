@@ -5,9 +5,10 @@ This project is a simple C program on Raspberry Pi for reading temperature and h
 The program communicates with the sensor through Linux's `/dev/i2c-1` device, sends measurement commands, reads raw sensor data, and converts the result into human-readable temperature and humidity values.
 
 
-## reference
+## My notes
 
 https://hackmd.io/xTgy64DCQUGVAlp3CVSeKA
+https://hackmd.io/fD7gAp37TKKviKNXXmiPHg
 
 ## demo
 
