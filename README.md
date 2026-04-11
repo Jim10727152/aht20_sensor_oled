@@ -16,17 +16,24 @@ https://hackmd.io/fD7gAp37TKKviKNXXmiPHg
 
 https://hackmd.io/oxxvyPPXQyGce2yy7AHCrQ
 
+## Prepare
+pi 4
+
+aht20 sensor
+
+ssh1106 oled
+
 ## Steps
 
 ```
-gcc aht20_oled.c -o aht20_oled
+$ gcc aht20_oled.c -o aht20_oled
 ```
 
 ```
-./aht20_oled
+$ ./aht20_oled
 ```
 
 
-## demo
+## Demo
 
 ![demo](images/demo_aht20_oled.jpg)
