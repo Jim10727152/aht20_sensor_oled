@@ -7,8 +7,15 @@ The program communicates with the sensor through Linux's `/dev/i2c-1` device, se
 
 ## My notes
 
-https://hackmd.io/xTgy64DCQUGVAlp3CVSeKA
+(sensor)
+
+https://hackmd.io/xTgy64DCQUGVAlp3CVSeKA 
+
+(oled)
+
 https://hackmd.io/fD7gAp37TKKviKNXXmiPHg
+
+https://hackmd.io/oxxvyPPXQyGce2yy7AHCrQ
 
 ## demo
 
