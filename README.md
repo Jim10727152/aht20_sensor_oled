@@ -16,6 +16,17 @@ https://hackmd.io/fD7gAp37TKKviKNXXmiPHg
 
 https://hackmd.io/oxxvyPPXQyGce2yy7AHCrQ
 
+## Steps
+
+```
+gcc aht20_oled.c -o aht20_oled
+```
+
+```
+./aht20_oled
+```
+
+
 ## demo
 
 ![demo](images/demo_aht20_oled.jpg)
