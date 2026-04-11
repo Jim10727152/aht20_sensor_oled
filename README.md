@@ -8,3 +8,7 @@ The program communicates with the sensor through Linux's `/dev/i2c-1` device, se
 ## reference
 
 https://hackmd.io/xTgy64DCQUGVAlp3CVSeKA
+
+## demo
+
+![demo](images/demo.jpg)
