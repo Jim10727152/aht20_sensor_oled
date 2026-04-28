@@ -8,9 +8,9 @@
 #include "aht20.h"
 #include "sh1106.h"
 
-#define I2C_DEVICE   "/dev/i2c-1"
-#define AHT20_ADDR   0x38
-#define SH1106_ADDR  0x3C
+#define I2C_DEVICE "/dev/i2c-1"
+#define AHT20_ADDR 0x38
+#define SH1106_ADDR 0x3C
 
 #define UPDATE_INTERVAL_SEC 10
 
@@ -22,12 +22,14 @@ static int open_i2c_device(const char *device_path, int slave_addr)
         return -1;
 
     fd = open(device_path, O_RDWR);
-    if (fd < 0) {
+    if (fd < 0)
+    {
         perror("open i2c device");
         return -1;
     }
 
-    if (ioctl(fd, I2C_SLAVE, slave_addr) < 0) {
+    if (ioctl(fd, I2C_SLAVE, slave_addr) < 0)
+    {
         perror("ioctl I2C_SLAVE");
         close(fd);
         return -1;
@@ -74,56 +76,64 @@ int main(void)
     float humidity = 0.0f;
 
     fd_aht20 = open_i2c_device(I2C_DEVICE, AHT20_ADDR);
-    if (fd_aht20 < 0) {
+    if (fd_aht20 < 0)
+    {
         fprintf(stderr, "Failed to open AHT20 device\n");
         goto cleanup;
     }
 
     fd_oled = open_i2c_device(I2C_DEVICE, SH1106_ADDR);
-    if (fd_oled < 0) {
+    if (fd_oled < 0)
+    {
         fprintf(stderr, "Failed to open SH1106 device\n");
         goto cleanup;
     }
 
-    if (aht20_init(fd_aht20) != 0) {
+    if (aht20_init(fd_aht20) != 0)
+    {
         fprintf(stderr, "AHT20 initialization failed\n");
         goto cleanup;
     }
 
-    if (sh1106_init(fd_oled) != 0) {
+    if (sh1106_init(fd_oled) != 0)
+    {
         fprintf(stderr, "SH1106 initialization failed\n");
         goto cleanup;
     }
 
-    if (sh1106_clear(fd_oled) != 0) {
+    if (sh1106_clear(fd_oled) != 0)
+    {
         fprintf(stderr, "SH1106 clear failed\n");
         goto cleanup;
     }
 
-    while (1) {
-        if (aht20_read_temperature_humidity(fd_aht20, &temperature, &humidity) != 0) {
-            fprintf(stderr, "Failed to read temperature and humidity\n");
-            sleep(1);
-            continue;
-        }
-
-        if (display_temperature_humidity(fd_oled, temperature, humidity) != 0) {
-            fprintf(stderr, "Failed to update OLED display\n");
-            break;
-        }
-
-        sleep(UPDATE_INTERVAL_SEC);
+    if (aht20_read_temperature_humidity(fd_aht20, &temperature, &humidity) != 0)
+    {
+        fprintf(stderr, "Failed to read temperature and humidity\n");
+        sleep(1);
+        goto cleanup;
     }
+
+    if (display_temperature_humidity(fd_oled, temperature, humidity) != 0)
+    {
+        fprintf(stderr, "Failed to update OLED display\n");
+        goto cleanup;
+    }
+
+    printf("Temperature: %.2f C, Humidity: %.2f %%\n", temperature, humidity);
+    sleep(10);
 
     ret = EXIT_SUCCESS;
 
 cleanup:
-    if (fd_oled >= 0) {
+    if (fd_oled >= 0)
+    {
         sh1106_poweroff(fd_oled);
         close(fd_oled);
     }
 
-    if (fd_aht20 >= 0) {
+    if (fd_aht20 >= 0)
+    {
         close(fd_aht20);
     }
 

@@ -1,23 +1,25 @@
-#include "aht20.h"
+#define _DEFAULT_SOURCE
 
+#include "aht20.h"
+#include <stdio.h>
 #include <stdint.h>
 #include <stddef.h>
 #include <unistd.h>
 #include <sys/types.h>
 
 /* AHT20 command */
-#define AHT20_CMD_STATUS       0x71
-#define AHT20_CMD_MEASURE      0xAC
-#define AHT20_ARG_MEASURE1     0x33
-#define AHT20_ARG_MEASURE2     0x00
+#define AHT20_CMD_STATUS 0x71
+#define AHT20_CMD_MEASURE 0xAC
+#define AHT20_ARG_MEASURE1 0x33
+#define AHT20_ARG_MEASURE2 0x00
 
 /* AHT20 status bit */
-#define AHT20_STATUS_BUSY      0x80
+#define AHT20_STATUS_BUSY 0x80
 #define AHT20_STATUS_CALIBRATED 0x08
 
 /* AHT20 config */
-#define AHT20_DATA_LEN         6
-#define AHT20_MAX_RETRY        10
+#define AHT20_DATA_LEN 6
+#define AHT20_MAX_RETRY 10
 #define AHT20_MEASURE_DELAY_US 80000
 
 static int aht20_read_status(int fd, uint8_t *status);
@@ -93,8 +95,7 @@ static int aht20_trigger_measurement(int fd)
     uint8_t cmd[3] = {
         AHT20_CMD_MEASURE,
         AHT20_ARG_MEASURE1,
-        AHT20_ARG_MEASURE2
-    };
+        AHT20_ARG_MEASURE2};
 
     if (fd < 0)
         return -1;
@@ -112,8 +113,9 @@ static int aht20_wait_until_ready(int fd)
     if (fd < 0)
         return -1;
 
-    for (int retry = 0; retry < AHT20_MAX_RETRY; retry++) {
-        sleep(AHT20_MEASURE_DELAY_US);
+    for (int retry = 0; retry < AHT20_MAX_RETRY; retry++)
+    {
+        usleep(AHT20_MEASURE_DELAY_US);
 
         if (aht20_read_status(fd, &status) != 0)
             return -1;
