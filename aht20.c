@@ -113,7 +113,7 @@ static int aht20_wait_until_ready(int fd)
         return -1;
 
     for (int retry = 0; retry < AHT20_MAX_RETRY; retry++) {
-        usleep(AHT20_MEASURE_DELAY_US);
+        sleep(AHT20_MEASURE_DELAY_US);
 
         if (aht20_read_status(fd, &status) != 0)
             return -1;
