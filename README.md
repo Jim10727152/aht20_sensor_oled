@@ -26,11 +26,11 @@ ssh1106 oled
 ## Steps
 
 ```
-$ gcc aht20_oled.c -o aht20_oled
+$ make
 ```
 
 ```
-$ ./aht20_oled
+$ ./sensor_oled
 ```
 
 
